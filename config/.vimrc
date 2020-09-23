@@ -3,9 +3,8 @@ set nu
 set nocp
 set whichwrap=<,>,[,]
 packadd termdebug
-let truepath=
-if !empty(glob(truepath . "pac.vim"))
-	source truepath . "pac.vim"
+if !empty(glob(s:truepath."pac.vim"))
+	execute 'source ' . s:truepath . "pac.vim"
 endif
 let g:termdebug_popup = 0
 "To set width of termdebug
