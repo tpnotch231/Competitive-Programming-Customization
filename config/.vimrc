@@ -3,6 +3,7 @@ set nu
 set nocp
 set whichwrap=<,>,[,]
 packadd termdebug
+let s:truepath="~/Documents/Programming/Contests/Vim-Customization/config/"
 if !empty(glob(s:truepath."pac.vim"))
 	execute 'source ' . s:truepath . "pac.vim"
 endif
@@ -13,4 +14,6 @@ set mouse=a
 set wildmenu
 set magic
 colo industry
+set visualbell
+set foldmethod=manual
 hi debugPC term=reverse ctermbg=darkblue guibg=darkblue
