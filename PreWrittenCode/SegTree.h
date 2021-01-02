@@ -37,7 +37,7 @@ class SegmentTree{
 		_tree.resize(2*v.size());
 		_build(0,v.size()-1,0,v);
 	}
-	void set(const int &ind,const T &val){
+	void change(const int &ind,const T &val){
 		_set(0,_tree.size()/2-1,ind,0,val);
 	}
 	T _query(const int &l,const int &r){
