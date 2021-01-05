@@ -30,23 +30,19 @@ class ModularInteger{
 		return (_value*power(a,_mod-2)._value)%_mod;
 	}
 
-	ModularInteger operator=(const ModularInteger &a){
-		_value=a._value;
-		return (*this);
-	}
-	ModularInteger operator+=(const ModularInteger &a){
+	ModularInteger& operator+=(const ModularInteger &a){
 		_value=(_value+a._value)%_mod;
 		return (*this);
 	}
-	ModularInteger operator-=(const ModularInteger &a){
+	ModularInteger& operator-=(const ModularInteger &a){
 		_value=(_value-a._value+_mod)%_mod;
 		return (*this);
 	}
-	ModularInteger operator*=(const ModularInteger &a){
+	ModularInteger& operator*=(const ModularInteger &a){
 		_value=(_value*a._value)%_mod;
 		return (*this);
 	}
-	ModularInteger operator/=(const ModularInteger &a){
+	ModularInteger& operator/=(const ModularInteger &a){
 		_value=(_value*power(a,_mod-2)._value)%_mod;
 		return (*this);
 	}
