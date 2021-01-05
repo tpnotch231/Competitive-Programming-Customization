@@ -51,6 +51,9 @@ class ModularInteger{
 		return (*this);
 	}
 
+	bool operator==(const ModularInteger &a){
+		return _value==a._value;
+	}
 	ModularInteger operator++(){
 		++_value;
 		_value%=_mod;
