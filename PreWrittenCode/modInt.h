@@ -1,10 +1,11 @@
 class ModularInteger{
 	long long int _value;
-	static const long long int _mod;
 	friend ModularInteger power(const ModularInteger &a,const long long int &b);
 	friend ostream& operator<<(ostream &out,const ModularInteger &a);
 	friend istream& operator>>(istream &in,ModularInteger &a);
 	public:
+	static const long long int _mod;
+	
 	ModularInteger()=default;
 	ModularInteger(int)=delete;
 	ModularInteger(double)=delete;
