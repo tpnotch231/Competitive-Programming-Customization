@@ -20,4 +20,8 @@ seed_seq seq{
 	(uint64_t) (uintptr_t) make_unique<char>().get()
 };
 mt19937 rng(seq);
-const long long int base = uniform_int_distribution<int>(0, ModularInteger::_mod-1)(rng);
+const long long int base = uniform_int_distribution<long long int>(1, ModularInteger::_mod-1)(rng),input_limit;
+vector<ModularInteger> powers(input_limit+1,1LL);
+for(int i=1;i<powers.size();++i){
+	powers[i]=powers[i-1]*base;
+}

@@ -47,6 +47,9 @@ class ModularInteger{
 		_value=(_value*power(a,_mod-2)._value)%_mod;
 		return (*this);
 	}
+	void retrieve(long long int &c){
+		c=_value;
+	}
 
 	bool operator==(const ModularInteger &a){
 		return _value==a._value;
