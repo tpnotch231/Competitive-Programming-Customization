@@ -29,6 +29,7 @@ function Functions()
 "^M in the replace section becomes a new line character.
 	execute '%s/LOG_POWER/ll power(ll a,ll b,ll mod=MOD){\tll ans=1;\tfor(ll i=0;(1LL<<i)<=b;++i){\t\tans*=(b\&(1LL<<i)?a:1LL);\t\tans%=mod;\t\ta*=a;\t\ta%=mod;\t}\treturn ans;}/ge'
 	execute '%s/MIN_QUEUE/template <typename T> using min_queue=priority_queue<T,vector<T>,greater<T>>;/ge'
+	execute '%s/RAN_HASH/seed_seq seq{\t\t(uint64_t) chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count(),\t\t(uint64_t) __builtin_ia32_rdtsc(),\t\t(uint64_t) (uintptr_t) make_unique<char>().get()\t};\tmt19937 rng(seq);\tconst long long int base = uniform_int_distribution<int>(0, ModularInteger::_mod-1)(rng);/ge'
 endfunction
 function Snippet(name)
 	execute 'r' . g:pre_written_code_path . a:name . '.h'
