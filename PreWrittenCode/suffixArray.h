@@ -21,8 +21,9 @@ struct SuffixArray{
 			if(s[sa[i]]!=s[sa[i-1]]) ++c;
 			e[sa[i]]=c;
 		}
+		aux.resize(n);
 		for(int j=0;(1<<j)<s.size();++j){
-			aux.assign(++c,0);
+			fill(aux.begin(),aux.end(),0);
 			c=0;
 			for(int i=0; i<sa.size(); ++i){
 				sa[i]=(sa[i]-(1<<j)+s.size())%s.size();
