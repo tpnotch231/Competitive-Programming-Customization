@@ -1,11 +1,15 @@
+template<int _mod> class ModularInteger;
+template<int mod> ModularInteger<mod> power(const ModularInteger<mod> &a,const long long int &b);
+template<int mod> ostream& operator<<(ostream &out,const ModularInteger<mod> &a);
+template<int mod> istream& operator>>(istream &in,ModularInteger<mod> &a);
+
+template<int _mod>
 class ModularInteger{
 	long long int _value;
-	friend ModularInteger power(const ModularInteger &a,const long long int &b);
-	friend ostream& operator<<(ostream &out,const ModularInteger &a);
-	friend istream& operator>>(istream &in,ModularInteger &a);
+	friend ModularInteger<_mod> power<_mod>(const ModularInteger<_mod> &a,const long long int &b);
+	friend ostream& operator<< <_mod>(ostream &out,const ModularInteger<_mod> &a);
+	friend istream& operator>> <_mod>(istream &in,ModularInteger<_mod> &a);
 	public:
-	static const long long int _mod;
-	
 	ModularInteger()=default;
 	ModularInteger(int)=delete;
 	ModularInteger(double)=delete;
@@ -66,21 +70,25 @@ class ModularInteger{
 		return val;
 	}
 };
-ostream& operator<<(ostream &out,const ModularInteger &a){
+template<int mod>
+ostream& operator<<(ostream &out,const ModularInteger<mod> &a){
 	return out<<a._value;
 }
-istream& operator>>(istream &in,ModularInteger &a){
+
+template<int mod>
+istream& operator>>(istream &in,ModularInteger<mod> &a){
 	istream &ret=in>>a._value;
-	a._value%=ModularInteger::_mod;
+	a._value%=mod;
 	return ret;
 }
-ModularInteger power(const ModularInteger &a,const long long int &b){
+template<int mod>
+ModularInteger<mod> power(const ModularInteger<mod> &a,const long long int &b){
 	long long int ans=1,x=a._value;
 	for(long long int i=0;(1LL<<i)<=b;++i){
 		ans*=(b&(1LL<<i)?x:1LL);
-		ans%=ModularInteger::_mod;
+		ans%=mod;
 		x*=x;
-		x%=ModularInteger::_mod;
+		x%=mod;
 	}
 	return ans;
 }
