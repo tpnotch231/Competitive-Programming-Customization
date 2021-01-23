@@ -1,6 +1,6 @@
 let g:pre_written_code_path="~/Documents/Programming/Contests/Vim-Customization/PreWrittenCode/"
 "Snippets
-function ExpandFor()
+function Expand()
 	execute '%s/f#\(.\+\)<\([^#\n]\+\)#\(.\+\){/for(int \3=\1; \3<\2; ++\3){/ge'
 	execute '%s/f#\(.\+\)>\([^#\n]\+\)#\(.\+\){/for(int \3=\1; \3>\2; --\3){/ge'
 	execute '%s/f#\(.\+\)<\([^#\n]\+\){/for(int i=\1; i<\2; ++i){/ge'
@@ -22,8 +22,7 @@ function ExpandFor()
 	execute '%s/n_l<\(.\+\)>/numeric_limits<\1>/ge'
 	execute '%s/s_c<\(.\+\)>/static_cast<\1>/ge'
 	execute '%s/W(\(.\+\))/int \1;\r\tcin>>\1;\r\tfor(int T_Case=1;T_Case<=\1;++T_Case)/ge'
-endfunction
-function Functions()
+
 	execute '%s/ORDERED_SET/template <typename T> using ordered_set =  tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;/ge'
 "To type ^M pres Ctrl-V then Enter in Linux, and Ctrl-O then Enter in Windows.
 "^M in the replace section becomes a new line character.
@@ -63,5 +62,4 @@ endfunction
 "Keybindings
 nnoremap <expr>  Compile()
 nnoremap <expr> s Run()
-nnoremap  :call ExpandFor()<CR>
-nnoremap <C-@> :call Functions()<CR>
+nnoremap  :call Expand()<CR>
