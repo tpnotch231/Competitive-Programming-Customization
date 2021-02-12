@@ -9,6 +9,20 @@ ll power(ll a,ll b,ll mod=MOD){
 	}
 	return ans;
 }
+//Integer floor square root INT_ROOT
+ll intRoot(ll x){
+	ll l{0},r{x};
+	while(l<r){
+		ll mid=(l+r+1)/2;
+		if(x/mid>=mid){
+			l=mid;
+		}
+		else{
+			r=mid-1;
+		}
+	}
+	return l;
+}
 //Ordered sets with find by order and find order of ORDERED_SET
 template <typename T> using ordered_set =  tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 //Min priority queue MIN_QUEUE

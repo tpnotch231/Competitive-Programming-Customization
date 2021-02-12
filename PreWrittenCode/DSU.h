@@ -9,7 +9,7 @@ class DSU{
 			return _Size;
 		}
 		int size(int i){
-			return ((i<0||i>=_size.size())?-1:_size[i]);
+			return ((i<0||i>=_size.size())?-1:_size[Find(i)]);
 		}
 		int Find(int x){
 			if(x!=_parent[x]){
