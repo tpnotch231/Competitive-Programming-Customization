@@ -7,6 +7,9 @@ let s:truepath="~/Documents/Programming/Contests/Vim-Customization/config/"
 if !empty(glob(s:truepath."pac.vim"))
 	execute 'source ' . s:truepath . "pac.vim"
 endif
+if !empty(glob(s:truepath."spaceParse.vim"))
+	execute 'source ' . s:truepath . "spaceParse.vim"
+endif
 let g:termdebug_popup = 0
 "To set width of termdebug
 let g:termdebug_wide = 80
@@ -16,4 +19,5 @@ set magic
 colo industry
 set visualbell
 set foldmethod=manual
+set cino+=(0
 hi debugPC term=reverse ctermbg=darkblue guibg=darkblue

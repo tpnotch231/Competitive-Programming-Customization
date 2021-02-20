@@ -15,7 +15,7 @@ class SegmentTree{
 	inline int _right(const int &x,const int &l,const int &mid){
 		return x+2*(mid-l+1);
 	}
-	//For the below functions, [l,r] is the range of elements whose value is stores in index cur.
+	//For the below functions, [l,r] is the range of elements whose value is stored in index cur.
 	T _build(int l,int r,int cur,vector<T> &v){
 		if(l==r) return _tree[cur]=v[l];
 		return _tree[cur]=_combine(_build(l,(l+r)/2,_left(cur,l,(l+r)/2),v),_build((l+r)/2+1,r,_right(cur,l,(l+r)/2),v));
@@ -40,7 +40,7 @@ class SegmentTree{
 	void change(const int &ind,const T &val){
 		_set(0,_tree.size()/2-1,ind,0,val);
 	}
-	T _query(const int &l,const int &r){
+	T query(const int &l,const int &r){
 		return _query(l,r,0,_tree.size()/2-1,0);
 	}
 };

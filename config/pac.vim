@@ -17,10 +17,14 @@ function Expand()
 	execute '%s/f\(.\+\)#\(.\+\)>\([^#\n]\+\)#\(.\+\)/for(int \4=\2; \4>\3; \4-=\1)/ge'
 	execute '%s/f\(.\+\)#\(.\+\)<\([^#\n]\+\)/for(int i=\2; i<\3; i+=\1)/ge'
 	execute '%s/f\(.\+\)#\(.\+\)>\([^#\n]\+\)/for(int i=\2; i>\3; i-=\1)/ge'
-	execute '%s/\([ ,\n\t(<]\)ll\([ ,\n\t>]\)/\1long long int\2/ge'
-	execute '%s/\([ ,\n\t(<]\)ull\([ ,\n\t>]\)/\1unsigned long long int\2/ge'
+	execute '%s/\([ ,\n\t(<]\)ll\([ ,\n\t>]\)/\1int64_t\2/ge'
+	execute '%s/\([ ,\n\t(<]\)ull\([ ,\n\t>]\)/\1uint64_t\2/ge'
+	
 	execute '%s/n_l<\(.\+\)>/numeric_limits<\1>/ge'
 	execute '%s/s_c<\(.\+\)>/static_cast<\1>/ge'
+	execute '%s/V[ ]\+<\([^@]\+\)>/vector<\1>/ge'
+	execute '%s/V[ ]\+<\([^@]\+\)>/vector<\1>/ge'
+
 	execute '%s/W(\(.\+\))/int \1;\r\tcin>>\1;\r\tfor(int T_Case=1;T_Case<=\1;++T_Case)/ge'
 
 	execute '%s/ORDERED_SET/template <typename T> using ordered_set =  tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;/ge'
@@ -29,7 +33,9 @@ function Expand()
 	execute '%s/LOG_POWER/ll power(ll a,ll b,ll mod=MOD){\tll ans=1;\tfor(ll i=0;(1LL<<i)<=b;++i){\t\tans*=(b\&(1LL<<i)?a:1LL);\t\tans%=mod;\t\ta*=a;\t\ta%=mod;\t}\treturn ans;}/ge'
 	execute '%s/MIN_QUEUE/template <typename T> using min_queue=priority_queue<T,vector<T>,greater<T>>;/ge'
 	execute '%s/RAN_HASH/seed_seq seq{\t\t(uint64_t) chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count(),\t\t(uint64_t) __builtin_ia32_rdtsc(),\t\t(uint64_t) (uintptr_t) make_unique<char>().get()\t};\tmt19937 rng(seq);\tconst long long int base = uniform_int_distribution<long long int>(1, ModularInteger::_mod-1)(rng),input_limit;\tvector<ModularInteger> powers(input_limit+1,1LL);\tfor(int i=1;i<powers.size();++i){\t\tpowers[i]=powers[i-1]*base;\t}/ge'
-	execute '%s/INT_ROOT/ll intRoot(ll x){\tll l{0},r{x};\twhile(l<r)\t\tll mid=(l+r+1)/2;\t\tif(x/mid>=mid){\t\t\tl=mid;\t\t}\t\telse{\t\t\tr=mid-1;\t\t}\t}\treturn l;}/ge'
+	execute '%s/INT_ROOT/ll intRoot(ll x){\tll l{0},r{x};\twhile(l<r){\t\tll mid=(l+r+1)\/2;\t\tif(x\/mid>=mid){\t\t\tl=mid;\t\t}\t\telse{\t\t\tr=mid-1;\t\t}\t}\treturn l;}/ge'
+
+	execute '%s/[A-Za-z0-9_ ]\+<[A-Za-z0-9_,<> ]\+>/\=CallParseWrapper(submatch(0))/ge'
 endfunction
 function Snippet(name)
 	execute 'r' . g:pre_written_code_path . a:name . '.h'
