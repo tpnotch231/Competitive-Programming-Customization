@@ -20,4 +20,7 @@ colo industry
 set visualbell
 set foldmethod=manual
 set cino+=(0
+set switchbuf+=useopen
+"set laststatus=2
+hi statusline ctermbg=white ctermfg=black
 hi debugPC term=reverse ctermbg=darkblue guibg=darkblue
