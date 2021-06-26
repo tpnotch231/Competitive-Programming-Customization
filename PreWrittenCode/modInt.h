@@ -28,10 +28,10 @@ class ModularInteger{
 	}
 
 	ModularInteger operator+(const ModularInteger &a){
-		return (_value+a._value)%_mod;
+		return (_value+a._value)-(_value+a._value>=_mod)*_mod;
 	}
 	ModularInteger operator-(const ModularInteger &a){
-		return (_value-a._value+_mod)%_mod;
+		return (_value-a._value)+(_value<a._value)*_mod;
 	}
 	ModularInteger operator*(const ModularInteger &a){
 		return (_value*a._value)%_mod;
@@ -41,11 +41,11 @@ class ModularInteger{
 	}
 
 	ModularInteger& operator+=(const ModularInteger &a){
-		_value=(_value+a._value)%_mod;
+		_value=(_value+a._value)-(_value+a._value>=_mod)*_mod;
 		return (*this);
 	}
 	ModularInteger& operator-=(const ModularInteger &a){
-		_value=(_value-a._value+_mod)%_mod;
+		_value=(_value-a._value)+(_value<a._value)*_mod;
 		return (*this);
 	}
 	ModularInteger& operator*=(const ModularInteger &a){
@@ -64,14 +64,12 @@ class ModularInteger{
 		return _value==a._value;
 	}
 	ModularInteger operator++(){
-		++_value;
-		_value%=_mod;
+		_value=(_value+1)*(_value!=_mod-1);
 		return _value;
 	}
 	ModularInteger operator++(int){
 		__int128 val=_value;
-		++_value;
-		_value%=_mod;
+		_value=(_value+1)*(_value!=_mod-1);
 		return val;
 	}
 };

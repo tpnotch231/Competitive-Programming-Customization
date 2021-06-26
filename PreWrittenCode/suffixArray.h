@@ -6,22 +6,22 @@ struct SuffixArray{
 	SuffixArray():_sa_made(false){}
 	vector<int> sa,lcp;
 	void buildSA(string s){
+		int c{0};
+		vector<int> aux(256),co,e;
 		s.push_back('$');
 		_sa_made=true;
-		int c{0};
-		vector<int> aux(256),co(s.size()),e(s.size());
 		sa.resize(s.size());
+		co.resize(s.size());
+		e.resize(s.size());
 		iota(sa.begin(),sa.end(),0);
-		aux[0]=1;
-		for(int i=0; i<s.size()-1; ++i) ++aux[s[i]];
+		for(int i=0; i<s.size(); ++i) ++aux[s[i]];
 		for(int i=1; i<aux.size(); ++i) aux[i]+=aux[i-1];
-		for(int i=s.size()-2; i>=0; --i) sa[--aux[s[i]]]=i;
-		sa[0]=s.size()-1;
+		for(int i=s.size()-1; i>=0; --i) sa[--aux[s[i]]]=i;
 		for(int i=1; i<s.size(); ++i){
 			if(s[sa[i]]!=s[sa[i-1]]) ++c;
 			e[sa[i]]=c;
 		}
-		aux.resize(n);
+		aux.resize(s.size());
 		for(int j=0;(1<<j)<s.size();++j){
 			fill(aux.begin(),aux.end(),0);
 			c=0;

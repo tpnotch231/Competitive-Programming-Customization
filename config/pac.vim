@@ -22,11 +22,11 @@ function Expand()
 	execute '%s/f\(.\+\)#\(.\+\)<\([^#\n]\+\)/for(int i=\2; i<\3; i+=\1)/ge'
 	execute '%s/f\(.\+\)#\(.\+\)>\([^#\n]\+\)/for(int i=\2; i>\3; i-=\1)/ge'
 	
-	while search('[ ,\n\t(<]ll[ ,\n\t>(]')!=0
-		execute '%s/\([ ,\n\t(<]\)ll\([ ,\n\t>(]\)/\1int64_t\2/ge'
+	while search('[ ,\n\t(<=+-\*/]ll[ ,\n\t>(]')!=0
+		execute '%s/\([ ,\n\t(<=+-\*/]\)ll\([ ,\n\t>(]\)/\1int64_t\2/ge'
 	endwhile
-	while search('[ ,\n\t(<]ull[ ,\n\t>(]')!=0
-		execute '%s/\([ ,\n\t(<]\)ull\([ ,\n\t>(]\)/\1uint64_t\2/ge'
+	while search('[ ,\n\t(<=+-\*/]ull[ ,\n\t>(]')!=0
+		execute '%s/\([ ,\n\t(<=+-\*/]\)ull\([ ,\n\t>(]\)/\1uint64_t\2/ge'
 	endwhile
 	
 	while search('V[ ]*<[^@]*>')!=0
