@@ -28,10 +28,10 @@ class ModularInteger{
 	}
 
 	ModularInteger operator+(const ModularInteger &a){
-		return (_value+a._value)-(_value+a._value>=_mod)*_mod;
+		return (_value+a._value)-(_value+a._value>=_mod?_mod:int64_t(0));
 	}
 	ModularInteger operator-(const ModularInteger &a){
-		return (_value-a._value)+(_value<a._value)*_mod;
+		return (_value-a._value)+(_value<a._value?_mod:int64_t(0));
 	}
 	ModularInteger operator*(const ModularInteger &a){
 		return (_value*a._value)%_mod;
@@ -41,11 +41,11 @@ class ModularInteger{
 	}
 
 	ModularInteger& operator+=(const ModularInteger &a){
-		_value=(_value+a._value)-(_value+a._value>=_mod)*_mod;
+		_value=(_value+a._value)-(_value+a._value>=_mod?_mod:int64_t(0));
 		return (*this);
 	}
 	ModularInteger& operator-=(const ModularInteger &a){
-		_value=(_value-a._value)+(_value<a._value)*_mod;
+		_value=(_value-a._value)+(_value<a._value?_mod:int64_t(0));
 		return (*this);
 	}
 	ModularInteger& operator*=(const ModularInteger &a){
@@ -75,18 +75,19 @@ class ModularInteger{
 };
 template<int64_t mod>
 ostream& operator<<(ostream &out,const ModularInteger<mod> &a){
-	return out<<a._value;
+	return out<<int64_t(a._value);
 }
 
 template<int64_t mod>
 istream& operator>>(istream &in,ModularInteger<mod> &a){
-	istream &ret=in>>a._value;
-	a._value%=mod;
+	int64_t i;
+	istream &ret=in>>i;
+	a._value=i%mod;
 	return ret;
 }
 template<int64_t mod>
 ModularInteger<mod> power(const ModularInteger<mod> &a,const __int128 &b){
-	__int128 ans=1,x=a._value;
+	__int128 ans=int64_t(1),x=a._value;
 	for(int i=0;(__int128(1)<<i)<=b;++i){
 		ans*=(b&(__int128(1)<<i)?x:__int128(1));
 		ans%=mod;

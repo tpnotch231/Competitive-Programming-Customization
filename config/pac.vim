@@ -1,4 +1,4 @@
-let g:pre_written_code_path="~/Documents/Programming/Contests/Vim-Customization/PreWrittenCode/"
+let g:pre_written_code_path="~/Vim-Customization/PreWrittenCode/"
 "Snippets
 function Expand()
 	if bufwinnr('log')>0
@@ -55,14 +55,14 @@ endfunction
 "Template
 function N(name)
 	execute ':edit ' . a:name . '.cpp'
-	call append(0,"#define MOD 1000000007")
-	call append(1,'#pragma GCC target("popcnt")')
-	call append(2,"#include <bits/stdc++.h>")
-	call append(3,"#include <numeric>")
-	call append(4,"#include <ext/pb_ds/assoc_container.hpp>")
-	call append(5,"#include <ext/pb_ds/tree_policy.hpp>")
-	call append(6,"using namespace __gnu_pbds;")
-	call append(7,"using namespace std;")
+	call append(0,'#pragma GCC target("popcnt")')
+	call append(1,"#include <bits/stdc++.h>")
+	call append(2,"#include <numeric>")
+	call append(3,"#include <ext/pb_ds/assoc_container.hpp>")
+	call append(4,"#include <ext/pb_ds/tree_policy.hpp>")
+	call append(5,"using namespace __gnu_pbds;")
+	call append(6,"using namespace std;")
+	call append(7,"const int64_t MOD = 1000000007;")
 	call append("$","int main(){")
 	call append("$","\tios_base::sync_with_stdio(false);")
 	call append("$","\tcin.tie(NULL);")
@@ -76,7 +76,7 @@ function Compile()
 		execute 'q!'
 	endif
 	execute 'wa'
-	execute '!g++ -g -std=c++17 % 2>log'
+	execute '!g++ -g -std=c++17 % -I ~ 2>log'
 	execute 'vsp'
 	execute 'wincmd l'
 	execute 'edit log'

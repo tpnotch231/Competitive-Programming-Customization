@@ -3,7 +3,7 @@ set nu
 set nocp
 set whichwrap=<,>,[,]
 packadd termdebug
-let s:truepath="~/Documents/Programming/Contests/Vim-Customization/config/"
+let s:truepath="~/Vim-Customization/config/"
 if !empty(glob(s:truepath."pac.vim"))
 	execute 'source ' . s:truepath . "pac.vim"
 endif
