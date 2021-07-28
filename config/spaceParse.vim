@@ -1,3 +1,4 @@
+"To be stored in the same directory as the template.vim file
 python3 << parser
 
 import vim,pyparsing as pp
@@ -33,4 +34,10 @@ parser
 function CallParseWrapper(sname)
 	let lis = split(execute ('py3 print(prettify("' . a:sname . '"),end="")'),"\n")
 	return lis[0]
+endfunction
+
+"Formats code to make it more readable
+function FormatCode()
+	execute ':normal '.search('using namespace std;').'gg'
+	execute ',$s/[A-Za-z0-9_]\+[ ]*<[A-Za-z0-9_,<>]\+>/\=CallParseWrapper(submatch(0))/ge'
 endfunction

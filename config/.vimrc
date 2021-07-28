@@ -4,11 +4,17 @@ set nocp
 set whichwrap=<,>,[,]
 packadd termdebug
 let s:truepath="~/Vim-Customization/config/"
-if !empty(glob(s:truepath."pac.vim"))
-	execute 'source ' . s:truepath . "pac.vim"
+if !empty(glob(s:truepath."template.vim"))
+	execute 'source ' . s:truepath . "template.vim"
+endif
+if !empty(glob(s:truepath."compile.vim"))
+	execute 'source ' . s:truepath . "compile.vim"
+endif
+if !empty(glob(s:truepath."expander.vim"))
+	execute 'source ' . s:truepath . "expander.vim"
 endif
 if !empty(glob(s:truepath."spaceParse.vim"))
-	execute 'source ' . s:truepath . "spaceParse.vim"
+	execute 'source ' . s:truepath . "/spaceParse.vim"
 endif
 let g:termdebug_popup = 0
 "To set width of termdebug
