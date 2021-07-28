@@ -6,7 +6,6 @@
 
 "TODO: Introduce logging capabilities?
 "TODO: Add CWD to possible locations of atcoder/?
-"TODO: Add keyboard shortcut
 
 let s:already_included={}
 
