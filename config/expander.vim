@@ -2,7 +2,6 @@
 " vimscript function
 " Ensure that the location of the root directory 'atcoder' is stored in the environment variable CPLUS_INCLUDE_PATH
 " Only works with #include "atcoder/.." not #include <atcoder/..>
-" Does not remove comments in the included files.
 
 "TODO: Introduce logging capabilities?
 "TODO: Add CWD to possible locations of atcoder/?
@@ -38,9 +37,11 @@ endfunction
 
 function ExpandACLFile()
 	let acl_directory_root=FindACLRootDirectory() "Should not have a / at the end
+	"Regexes
 	let atcoder_include='#include\s*"atcoder\/\([a-z_]*\)\(\|\.hpp\)"\s*'
 	let atcoder_header_guard='#.*ATCODER_[A-Z_]*_HPP.*\n'
-	let pragma_once="\s*#pragma\s*once\s*"
+	let pragma_once='\s*#pragma\s*once\s*'
+	let comment='^\s*\/\/.*\n'
 
 	while search(atcoder_include)!=0
 		try
@@ -52,14 +53,13 @@ function ExpandACLFile()
 	endwhile
 	
 	"Remove header guards
-	while search(atcoder_header_guard)!=0
-		execute '%s/' . atcoder_header_guard . '//'
-	endwhile
+	execute '%s/' . atcoder_header_guard . '//'
 	
 	"Remove #pragma once
-	while search(pragma_once)!=0
-		execute '%s' . pragma_once . '//'
-	endwhile
+	execute '%s/' . pragma_once . '//e'
+
+	"Remove all comments
+	execute '%s/' . comment . '//'
 
 	"Add attribution
 	call append(line('^'),'//Everything in namespace atcoder along with a few includes outside it are taken from Atcoder Library (Github link: https://github.com/atcoder/ac-library)')
