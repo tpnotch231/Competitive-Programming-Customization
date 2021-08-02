@@ -1,29 +1,25 @@
 //DSU implementing Union by size instead of rank.
-//_parent[i] stores the parent of node i in the standard tree implementation of DSU.
-//_size[i] stores the size of the component that was at some point rooted at i. Because of Find operations many
-//values in this array quickly become meaningless. The size(int) function should be used to retrieve size of a
-//component.
+//_parent_or_size[i] stores the parent of node i in the standard tree implementation of DSU if it has a parent, and
+//the size of the tree rooted at i * -1 otherwise. Memory efficient.
+//The size(int) function should be used to retrieve size of a component.
 class DSU{
-		vector<int> _parent,_size;
+		vector<int> _parent_or_size;
 		int _Size;
 	public:
 		//Constructs DSU with n elements.
-		DSU(int n=0):  _parent(n), _size(n,1), _Size(n){
-			iota(_parent.begin(),_parent.end(),0);
+		DSU(int n=0):  _parent_or_size(n), _Size(n){
+			fill(_parent_or_size.begin(),_parent_or_size.end(),-1);
 		}
 		
 		//Resets the values in the DSU and changes size.
 		void clear(unsigned long new_size){
-			_size.assign(new_size,1);
-			_parent.resize(new_size);
-			iota(_parent.begin(),_parent.end(),0);
+			_parent_or_size.assign(new_size,-1);
 			_Size=new_size;
 		}
 		//Adds a new singleton set at the end (with the new last index).
 		void create(){
 			++_Size;
-			_size.push_back(1);
-			_parent.push_back(_parent.size());
+			_parent_or_size.push_back(-1);
 		}
 		//Returns number of sets.
 		int size(){
@@ -31,30 +27,30 @@ class DSU{
 		}
 		//Returns number of nodes in a given set.
 		int size(int i){
-			return ((i<0||i>=_size.size())?-1:_size[Find(i)]);
+			return ((i<0||i>=_parent_or_size.size())?-1:-_parent_or_size[Find(i)]);
 		}
 		//The find operation.
 		int Find(int x){
-			if(x!=_parent[x]){
-				_parent[x]=Find(_parent[x]);
+			if(_parent_or_size[x]>=0){
+				return _parent_or_size[x]=Find(_parent_or_size[x]);
 			}
-			return _parent[x];
+			else{
+				return x;
+			}
 		}
 		//The union operation
 		int Union(int x,int y){
 			x=Find(x);
 			y=Find(y);
-			if(_size[x]<_size[y]){
-				_parent[x]=y;
-				_size[y]+=_size[x];
+			if(_parent_or_size[x]>_parent_or_size[y]){
+				_parent_or_size[y]+=_parent_or_size[x];
 				--_Size;
-				return y;
+				return _parent_or_size[x]=y;
 			}
 			else if(x!=y){
-				_parent[y]=x;
-				_size[x]+=_size[y];
+				_parent_or_size[x]+=_parent_or_size[y];
 				--_Size;
-				return x;
+				return _parent_or_size[y]=x;
 			}
 			return -1;
 		}
