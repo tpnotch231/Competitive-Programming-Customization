@@ -5,7 +5,7 @@ function Compile()
 		execute 'q!'
 	endif
 	execute 'wa'
-	execute '!g++ -g -std=c++17 % 2>log'
+	execute '!g++ -g -I ' . g:external_directory_root . ' -std=c++17 % 2>log'
 	execute 'vsp'
 	execute 'wincmd l'
 	execute 'edit log'

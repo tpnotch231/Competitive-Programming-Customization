@@ -3,7 +3,9 @@ set nu
 set nocp
 set whichwrap=<,>,[,]
 packadd termdebug
-let s:truepath="~/Vim-Customization/config/"
+let s:truepath="~/Competitive-Programming-Customization/Vim/Scripts/"
+let g:pre_written_code_path="~/Competitive-Programming-Customization/PreWrittenCode/"  "Used in template.vim in ExpandLargeSnippet()
+let g:external_directory_root="~/Competitive-Programming-Customization/External" "Should not have / at the end, currently used in expander.vim and possibly some future testing library
 if !empty(glob(s:truepath."template.vim"))
 	execute 'source ' . s:truepath . "template.vim"
 endif

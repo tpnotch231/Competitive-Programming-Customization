@@ -20,23 +20,9 @@ function IncludeHeader(header_name,acl_directory_root)
 	return ""
 endfunction
 
-function FindACLRootDirectory()
-	let potential_locations=$CPLUS_INCLUDE_PATH
-	let potential_locations_list=split(potential_locations,":")
-	for location in potential_locations_list
-		let location_with_slash=location
-		if location[strlen(location)-1]!='/'
-			let location_with_slash .= '/'
-		endif
-		if !empty(glob(location_with_slash."atcoder"))
-			return location_with_slash."atcoder"
-		endif
-	endfor
-	return ""
-endfunction
-
 function ExpandACLFile()
-	let acl_directory_root=FindACLRootDirectory() "Should not have a / at the end
+	let acl_directory_root=g:external_directory_root . "/atcoder" "Global defined in .vimrc, this variable should not have a / at the end
+	
 	"Regexes
 	let atcoder_include='#include\s*"atcoder\/\([a-z_]*\)\(\|\.hpp\)"\s*'
 	let atcoder_header_guard='#.*ATCODER_[A-Z_]*_HPP.*\n'

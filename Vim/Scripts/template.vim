@@ -1,5 +1,3 @@
-let g:pre_written_code_path="~/Vim-Customization/PreWrittenCode/"
-
 "Base Template
 function N(name)
 	execute ':edit ' . a:name . '.cpp'
@@ -97,6 +95,7 @@ endfunction
 
 "Not included in the Expand function as it behaves differently
 function ExpandLargeSnippet(name)
+	"g:pre_written_code_path is defined in .vimrc
 	execute 'r' . g:pre_written_code_path . a:name . '.h'
 endfunction
 
